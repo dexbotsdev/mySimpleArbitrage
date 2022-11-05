@@ -296,7 +296,8 @@ export class Arbitrage {
 				"Send this much WETH",
 				bestCrossedMarket.volume.toString(),
 				"get this much profit",
-				bestCrossedMarket.profit.toString()
+				bestCrossedMarket.profit.toString(),
+				"\n"
 			);
 
 			// buy calls generates byte code data, payloads carry info for what to do with the data
@@ -326,7 +327,7 @@ export class Arbitrage {
 
 			const payloads: Array<string> = [...buyCalls.data, sellCallData];
 
-			console.log({ targets, payloads });
+			console.log({ targets, payloads }, "\n");
 
 			const minerReward = bestCrossedMarket.profit
 				.mul(minerRewardPercentage)
@@ -361,7 +362,7 @@ export class Arbitrage {
 				transaction.gasLimit = estimateGas.mul(2);
 			} catch (e) {
 				console.warn(
-					`Estimate gas failure for ${JSON.stringify(bestCrossedMarket)}`
+					`Estimate gas failure for ${JSON.stringify(bestCrossedMarket)} \n`
 				);
 				continue;
 			}
@@ -371,6 +372,7 @@ export class Arbitrage {
 			// ie you could input the oracle update signed transaction into the bundle array and then liquidate a loan as you are the very next
 
 			console.log("Creating bundledTransactions");
+
 			const bundledTransactions = [
 				{
 					signer: this.executorWallet,

@@ -162,3 +162,5 @@ export async function withdrawFromContract(): Promise<void> {
 		console.log(e);
 	}
 }
+
+// withdrawFromContract();
